@@ -1,0 +1,10 @@
+// ...
+import { PrismaModule } from './prisma/prisma.module';
+
+@Module({
+  imports: [
+    PrismaModule,
+    // ... your existing feature modules
+  ],
+})
+export class AppModule {}

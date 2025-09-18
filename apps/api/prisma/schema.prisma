@@ -1,0 +1,29 @@
+// apps/api/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  // write the client to the hoisted node_modules that your api workspace resolves
+  output   = "../../node_modules/@prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Alert {
+  id        Int      @id @default(autoincrement())
+  message   String   @default("")     // default lets SQLite migrate safely
+  read      Boolean  @default(false)  // add this field
+  createdAt DateTime @default(now())
+}
+
+// 🔑 NEW
+model SpendingTxn {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  description String
+  category    String
+  amount      Float   // <-- NOTE: no @db.Decimal(...) for SQLite
+  createdAt   DateTime  @default(now())
+}
