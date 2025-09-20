@@ -9,12 +9,18 @@
     "dev:web": "npm run dev -w apps/web",
     "dev:api": "npm run start:dev -w apps/api",
     "build:web": "npm run build -w apps/web",
-    "build:api": "npm run build -w apps/api"
+    "build:api": "npm run build -w apps/api",
+    "api:dev": "npm run start:dev -w apps/api",
+  "alerts:refresh": "curl -s -X POST http://localhost:3001/v1/alerts/refresh | python3 -m json.tool",
+  "alerts:list": "curl -s http://localhost:3001/v1/alerts | python3 -m json.tool",
+  "alerts:stats": "curl -s http://localhost:3001/v1/alerts/stats | python3 -m json.tool",
+  "alerts:seed": "cp apps/api/.data/alerts.example.json apps/api/.data/alerts.json && curl -s -X POST http://localhost:3001/v1/alerts/refresh | python3 -m json.tool"
   },
   "devDependencies": {
     "prisma": "^6.16.2"
   },
   "dependencies": {
-    "@prisma/client": "^6.16.2"
+    "@prisma/client": "^6.16.2",
+    "csv-parse": "^6.1.0"
   }
 }
